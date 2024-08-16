@@ -1,0 +1,174 @@
+a {
+    color: whitesmoke;
+}
+
+a:hover {
+    color: whitesmoke;
+    background-color: unset;
+}
+
+.signout {
+    color: whitesmoke;
+}
+
+.head {
+    background-color: #2d2d2d;
+}
+
+.events {
+    background-color: rgb(20, 20, 20);
+}
+
+.search_cont {
+    background-color: whitesmoke;
+}
+
+.bottom {
+    border-top: 1px dotted white;
+}
+
+.del,
+.del1 {
+    color: red;
+}
+
+.welcome {
+    color: whitesmoke;
+    background-color: #2d2d2d;
+}
+
+.res {
+    color: rgb(1, 200, 1);
+}
+
+body {
+    background-color: rgb(20, 20, 20);
+    color: whitesmoke;
+}
+
+[type=file] {
+    border: 1px solid whitesmoke !important;
+}
+
+.event_file * {
+    border: 2px dotted whitesmoke;
+}
+
+.btn1 {
+    border: 0;
+}
+
+.input2 {
+    border: 0;
+}
+
+.post_input {
+    color: black;
+}
+
+.footer1 {
+    background-color: white;
+    color: black;
+}
+
+.fscreen {
+    background-color: rgb(20, 20, 20);
+}
+
+.input_group {
+    background-color: white;
+}
+
+.file_fscreen .file_container .file img,
+.file_fscreen .file_container .file video {
+    border: 1px solid whitesmoke;
+}
+
+.box {
+    background-color: rgb(20, 20, 20);
+}
+
+.n_event input,
+.n_event textarea,
+.e_event input,
+.e_event textarea {
+    border: 0;
+    outline: 0;
+}
+
+.sidebar {
+    background-color: #2d2d2d;
+}
+
+.add {
+    color: #2d2d2d;
+    background-color: whitesmoke;
+}
+
+.event {
+    border: 2px solid rgb(10, 10, 10);
+}
+
+.form_div button {
+    border: 0;
+}
+
+.e_uploads_preview,
+.uploads_preview,
+.uploads_view {
+    background-color: #2d2d2d;
+    border: 2px dashed rgb(10, 10, 10);
+}
+
+.uploads_view {
+    border: 1px solid rgb(10, 10, 10);
+}
+
+.container {
+    border: 1px solid white;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: whitesmoke;
+    color: #2d2d2d;
+}
+
+.top_nav .nav_icon.active {
+    border-bottom: 1px solid whitesmoke;
+}
+
+.top_nav .nav_icon:hover {
+    border-bottom: 1px dotted whitesmoke;
+}
+
+.msg_box {
+    color: black;
+    background-color: whitesmoke;
+}
+
+.top_act .icon:hover,
+.top_act a:hover {
+    border-bottom: 1px dotted whitesmoke;
+}
+
+.event {
+    background-color: #2d2d2d;
+}
+
+.action_pare .del:hover {
+    text-decoration: underline;
+}
+
+#size_cont {
+    border: 1px solid whitesmoke;
+}
+
+::-webkit-scrollbar-thumb {
+    background: whitesmoke;
+    border-radius: 100rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}

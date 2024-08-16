@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="EN-GB">
+
+    <head>
+        <title>
+            Lifelog - Profile &amp; Preferences.
+        </title>
+        <meta charset="UTF-8">
+        <meta name="description" content="I'm a friend and lifelog that you can share things with." />
+        <meta name="keywords" content="lifelog, friend, events, communicate" />
+        <meta name="author" content="Dml Ademola, TechWise LLC." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="rgb(1, 1, 34)" />
+        <link rel="icon" href="{% if user.theme == "dark" %}{% static 'images/lifelog_dark.png' %}{% else %}{% static 'images/lifelog_light.png' %}{% endif %}" type="image/png" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% if user.theme == "dark" %}{% static 'css/dark_theme.css' %}{% else %}{% static 'css/light_theme.css' %}{% endif %}" id="theme" />
+    </head>
+
+    <body>
+        {% if user.newly_signed_in == True %}
+        <div class='welcome' id='welcome'>
+            <h1>Welcome to ...</h1>
+            <img src="{% if user.theme == "dark" %}{% static 'images/lifelog_dark.png' %}{% else %}{% static 'images/lifelog_light.png' %}{% endif %}" class="wel_img" alt='#img'><br />
+        </div>
+        {% endif %}
+        <div class="container1">
+            <div class="head" style="border-bottom: 1px solid ">
+                <div class="division logo">
+                    <img src="{% if user.theme == "dark" %}{% static 'images/lifelog_dark.png' %}{% else %}{% static 'images/lifelog_light.png' %}{% endif %}" alt='' />
+                    {% comment %} <p>Lifelog.</p> {% endcomment %}
+                </div>
+                <div class="division top_nav">
+                    <div class="nav_icon home" title="Home.">
+                        <span class='icon icon8'></span>
+                    </div>
+                    <div class="nav_icon trash" title="Trash.">
+                        <span class='icon icon4'></span>
+                    </div>
+                    <div class="nav_icon profile active" title="Profile &amp; Preferences.">
+                        <span class='icon icon10'></span>
+                    </div>
+                    <div class="nav_icon signout" title="Sign Out.">
+                        <span class='del icon icon7'></span>
+                    </div>
+                </div>
+                <div class="division greetings">
+                    <p>Hola, {{user.fullname}}</p>
+                </div>
+            </div>
+            <div class="settings" id="settings">
+                <form name="settings" id="settings" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2 style="text-align: center;">Profile &amp; Preferences.</h2>
+                    {% if messages %}{% for message in messages %}{{message}}{% endfor %}{% endif %}
+                    <fieldset>
+                        <legend>Profile</legend>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                {% if user.img %}<img src="{{user.img.url}}">{% endif %}
+                                <label for="fullname">Full Name</label>
+                                <input type="text" name="fullname" class="input2" id="fullname" value="{% if fields %}{{fields.fullname}}{% else %}{{user.fullname}}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" class="input2">
+                                    <option value="r" {% if fields %}{% if fields.gender == 'r' %} selected{% endif %}{% else %}{% if user.gender == 'r' %} selected{% endif %}{% endif %}>Rather not say</option>
+                                    <option value="m" {% if fields %}{% if fields.gender == 'm' %} selected{% endif %}{% else %}{% if user.gender == 'm' %} selected{% endif %}{% endif %}>Male</option>
+                                    <option value="f" {% if fields %}{% if fields.gender == 'f' %} selected{% endif %}{% else %}{% if user.gender == 'f' %} selected{% endif %}{% endif %}>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label for="date_of_birth">Date of Birth</label>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <select name="day" id="day" class="input2">
+                                    {% if fields %}
+                                    {% for day in fields.dob.days %}
+                                    {% spaceless %}
+                                    {{day}}
+                                    {% endspaceless %}
+                                    {% endfor %}
+                                    {% else %}
+                                    {% for day in user.dob.days %}
+                                    {% spaceless %}
+                                    {{day}}
+                                    {% endspaceless %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="flex_div">
+                                <select name="month" id="month" class="input2">
+                                    {% if fields %}
+                                    {% for month in fields.dob.months %}
+                                    {{month}}
+                                    {% endfor %}
+                                    {% else %}
+                                    {% for month in user.dob.months %}
+                                    {{month}}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="flex_div">
+                                <select name="year" id="year" class="input2">
+                                    {% if fields %}
+                                    {% for year in fields.dob.years %}
+                                    {{year}}
+                                    {% endfor %}
+                                    {% else %}
+                                    {% for year in user.dob.years %}
+                                    {{year}}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="phone_no">Phone Number</label>
+                                <input type="text" name="phone_no" class="input2" id="phone_no" value="{% if fields %}{{fields.phone_no}}{% else %}{{user.phone_no}}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="input2" id="email" value="{% if fields %}{{fields.email}}{% else %}{{user.email}}{% endif %}" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Preferences/Others</legend>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" class="input2" id="username" value="{% if fields %}{{fields.username}}{% else %}{{user.username}}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="theme">Theme</label>
+                                <select name="theme" id="theme" class="input2">
+                                    <option value="light" {% if fields %}{% if fields.theme == 'light' %} selected{% endif %}{% else %}{% if user.theme == 'light' %} selected{% endif %}{% endif %}>Light(Default).</option>
+                                    <option value="dark" {% if fields %}{% if fields.theme == 'dark' %} selected{% endif %}{% else %}{% if user.theme == 'dark' %} selected{% endif %}{% endif %}>Dark.</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="input2" id="password" value="" autocomplete="off" placeholder="Your existing password ..." />
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="npassword">New Password</label>
+                                <input type="password" name="npassword" class="input2" id="npassword" value="" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="flex_row">
+                            <div class="flex_div">
+                                <label for="cpassword">Confirm New Password</label>
+                                <input type="password" name="cpassword" class="input2" id="cpassword" value="" autocomplete="off" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form_div">
+                        <button type="submit" class="save">Save Changes</button>
+                    </div>
+                </form>
+                <div class="others">
+                    <div class="other_div">
+                        <div id="wait">
+                            <div class="pending"></div>Please wait...
+                        </div>
+                        <button id="clear_tra">Clear Trash</button>
+                        <button id="del_acc">Delete my account</button>
+                    </div>
+                    <div class="other_div">
+                        <p style="margin: 0; text-align: center;">Made by Ademola Abdulraheem.</p>
+                        <p style="margin: 0; text-align: center;">Contact: +2349161847618</p>
+                        <p style="margin: 0; text-align: center;">Email: dmlademola10@gmail.com</p>
+                        {#<p>Donate: </p>#}
+                    </div>
+                    <div class="modal" id="modal">
+                        <span class="close">&times;</span>
+                        <div class="box">
+                            <h3>Verify it is you.</h3>
+                            <p id="message"></p>
+                            <p id="response"></p>
+                            <form name="verify" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="" />
+                                <div class="input_group">
+                                    <input type="password" id="psw" name="password" placeholder="Input Password..." />
+                                </div>
+                                <div class="form_div">
+                                    <button type="submit">CONTINUE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/dollar.js'%}"></script>
+        <script src="{% static 'js/script_profile.js' %}"></script>
+    </body>
+
+</html>
